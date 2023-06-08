@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit,  reset,  formState: { errors }, } = useForm();
+  const onSubmit = (data) =>{
+    console.log(data)
+    reset()
+  };
   const [show, setShow] = useState(true);
 
   const showPassword =()=>{
@@ -16,7 +19,7 @@ const Login = () => {
   }
 
   return (
-    <div className="w-4/5 mx-auto my-20 p-10  font-serif shadow-2xl">
+    <div className="w-4/5 mx-auto my-10 p-10  font-serif shadow-2xl">
       <div>
         <h1 className="font-bold text-5xl text-blue-500 text-center  pb-20 ">
           Please Login Now !!!!!
@@ -30,26 +33,61 @@ const Login = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col  items-center justify-between pt-8 px-10 "
             >
-              <input
-                className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
-                placeholder="Email"
-                type="text"
-                {...register("firstName", { required: true, maxLength: 20 })}
-              />
-
-              <div className="flex items-center  w-full">
+             <div className="w-full">
                 <input
                   className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
-                  placeholder="password"
-                  type={show ? "text" : "password"}
-                  {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
+                  placeholder="Email"
+                  type="text"
+                  {...register("email", { required: true })}
                 />
-                <span className="-ml-10"  onClick={showPassword}>
-                    {
-                        show ? < AiOutlineEyeInvisible></AiOutlineEyeInvisible>:<FiEye></FiEye>
-                    }
-                </span>
+                {errors.email && (
+                  <span className="text-red-600">Email is required</span>
+                )}
               </div>
+
+              <div className="w-full">
+                <div className="flex items-center  w-full">
+                  <input
+                    className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
+                    placeholder="password"
+                    type={show ? "text" : "password"}
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      maxLength: 20,
+                      pattern:
+                        /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                    })}
+                  />
+                  <span className="-ml-10" onClick={showPassword}>
+                    {show ? (
+                      <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
+                    ) : (
+                      <FiEye></FiEye>
+                    )}
+                  </span>
+                </div>
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-600">Password must be 6 characters</p>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-red-600">
+                    Password must be less than 20 characters
+                  </p>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600">
+                    Password must have one Uppercase one lower case, one number
+                    and one special character.
+                  </p>
+                )}
+              </div>
+
+
+
               <input type="submit" className="btn btn-block rounded-full mt-4 btn-primary" />
             </form>
             <h1 className="text-black mx-10 mt-4 mb-10">You are new?<Link to='/singup' className="link text-blue-700">please SingUp</Link></h1>

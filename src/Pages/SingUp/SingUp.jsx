@@ -12,22 +12,52 @@ const SingUp = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+
   const [show, setShow] = useState(false);
+
+
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    
+    const image =data.photo[0].name;
+    console.log(image)
+    const formData = new FormData()
+    formData.append('image', image)
+    console.log(formData)
+
+
+
+    const url = `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_IMGBB_KEY
+      }`
+
+
+      fetch(url, {
+        method:'POST',
+        body:formData,
+      })
+        .then(res => res.json())
+        .then(imageData => {
+      const imageUrl = imageData.data.display_url
+        console.log(imageUrl)})
+        .catch(err=>console.log(err))
+
+   
   };
+
+
+
 
   const showPassword = () => {
     setShow(!show);
   };
   return (
-    <div className="w-4/5 mx-auto my-20 p-10  font-serif shadow-2xl">
+    <div className="w-4/5 mx-auto my-10 p-10  font-serif shadow-2xl">
       <div>
         <h1 className="font-bold text-5xl text-blue-500 text-center  pb-20 ">
-          Please Login Now !!!!!
+          Please Registration Now !!!!!
         </h1>
-        <div className="flex text-black">
+        <div className="flex items-center justify-center text-black">
           <div className="w-1/2 rounded-lg">
             <img src={singUpImg} alt="" />
           </div>
