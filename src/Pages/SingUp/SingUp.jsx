@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import singUpImg from "../../assets/login/registration.png";
 import { useForm } from "react-hook-form";
 import { FiEye } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SingUp = () => {
   const {
@@ -12,40 +15,59 @@ const SingUp = () => {
     reset,
     formState: { errors },
   } = useForm();
-
-
+  const {
+    loading,
+    setLoading,
+    createUser,
+    updateUserProfile,
+  } = useContext(AuthContext)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/';
   const [show, setShow] = useState(false);
 
 
+  // handle user create
   const onSubmit = (data) => {
     
-    const image =data.photo[0].name;
-    console.log(image)
+
+
+
+    // image upload
+    const image =data.photo[0];
     const formData = new FormData()
     formData.append('image', image)
-    console.log(formData)
-
-
 
     const url = `https://api.imgbb.com/1/upload?key=${
         import.meta.env.VITE_IMGBB_KEY
       }`
-
-
       fetch(url, {
         method:'POST',
         body:formData,
       })
         .then(res => res.json())
         .then(imageData => {
-      const imageUrl = imageData.data.display_url
-        console.log(imageUrl)})
-        .catch(err=>console.log(err))
+      const imageUrl = imageData.data.display_url;
 
-   
+      createUser(data.email,data.password)
+      .then(result=>{
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'SingUp successfull',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+      .catch(err => {
+        setLoading(false)
+        console.log(err.message)
+       
+      })
+
+
+        }) 
   };
-
-
 
 
   const showPassword = () => {
@@ -53,6 +75,10 @@ const SingUp = () => {
   };
   return (
     <div className="w-4/5 mx-auto my-10 p-10  font-serif shadow-2xl">
+
+      <Helmet>
+        <title>SingUp | Dance Studio</title>
+      </Helmet>
       <div>
         <h1 className="font-bold text-5xl text-blue-500 text-center  pb-20 ">
           Please Registration Now !!!!!

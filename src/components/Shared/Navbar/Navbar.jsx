@@ -1,19 +1,50 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from '../../../assets/logo/logo.jpg'
-
+import logo from "../../../assets/logo/logo.jpg";
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+
+  const{user,logOut}=useContext(AuthContext);
+
+  const handleLogOut =()=>{
+    logOut()
+    .then(()=>{
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'LogOut successfull',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+    .catch(error=>console.log(error))
+  }
+
+
+ 
   const NavOptions = (
     <>
       <li className="">
-        <NavLink to="/" className='bg-transparent font-semibold hover:scale-125  hover:text-purple-400 hover:font-bold transition text-black'>Home</NavLink>
+        <NavLink
+          to="/"
+          className="bg-transparent font-semibold hover:scale-125  hover:text-purple-400 hover:font-bold transition text-black"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink className='bg-transparent  font-semibold hover:scale-125  hover:text-purple-500 hover:font-bold transition text-black'>Instructors</NavLink>
+        <NavLink className="bg-transparent  font-semibold hover:scale-125  hover:text-purple-500 hover:font-bold transition text-black">
+          Instructors
+        </NavLink>
       </li>
       <li>
-        <NavLink className='bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black' >Classes</NavLink>
+        <NavLink className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black">
+          Classes
+        </NavLink>
       </li>
+
     </>
   );
   return (
@@ -44,10 +75,13 @@ const Navbar = () => {
               {NavOptions}
             </ul>
           </div>
-          <Link to='/'>
+          <Link to="/">
             <div className="ml-8 flex justify-center gap-1 group items-center">
-                <img src={logo} className="w-14 h-12" alt="" />
-                <h1 className=" group-hover:scale-110 text-2xl font-bold italic hidden md:block text-transparent bg-gradient-to-r from-purple-400 to-purple-800 bg-clip-text transition "> Dance Studio</h1>
+              <img src={logo} className="w-14 h-12" alt="" />
+              <h1 className=" group-hover:scale-110 text-2xl font-bold italic hidden md:block text-transparent bg-gradient-to-r from-purple-400 to-purple-800 bg-clip-text transition ">
+                {" "}
+                Dance Studio
+              </h1>
             </div>
           </Link>
         </div>
@@ -55,7 +89,10 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{NavOptions}</ul>
         </div>
         <div className="navbar-end">
-        <NavLink to='/login' className='bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black' >Login</NavLink>
+         {
+          user ? <><button onClick={handleLogOut} className="btn btn-primary">LogOut</button ></> : <><Link  to="/login"
+          className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black">Login</Link></>
+         }
         </div>
       </div>
     </div>
