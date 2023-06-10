@@ -17,7 +17,6 @@ const SingUp = () => {
     formState: { errors },
   } = useForm();
   const {
-    loading,
     setLoading,
     createUser,
     updateUserProfile,
@@ -66,13 +65,14 @@ const SingUp = () => {
         updateUserProfile(data.name,imageUrl)
         .then(()=>{
           Swal.fire({
-            position: 'top-center',
+            position: 'center',
             icon: 'success',
             title: 'SingUp successfull',
             showConfirmButton: false,
             timer: 1500
           })
           navigate(from, { replace: true });
+          reset();
         })
         .catch((err)=>{
           setLoading(false)
@@ -200,7 +200,7 @@ const SingUp = () => {
             <input
                 className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
                 placeholder="Conform password"
-                type="text"
+                type="password"
                 {...register("conformPassword", { required: true })}
               />
               {conformError && (
