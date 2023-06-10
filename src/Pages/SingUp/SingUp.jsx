@@ -7,6 +7,7 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 
 const SingUp = () => {
   const {
@@ -25,6 +26,7 @@ const SingUp = () => {
   const location = useLocation()
   const from = location.state?.from?.pathname || '/';
   const [show, setShow] = useState(false);
+  const [conformError,setConformError]= useState('');
 
 
   // handle user create
@@ -33,6 +35,12 @@ const SingUp = () => {
 
 
 
+
+
+    if(data.password != data.conformPassword){
+      setConformError("Don't Match ConformPassword")
+      return;
+    }
     // image upload
     const image =data.photo[0];
     const formData = new FormData()
@@ -51,12 +59,24 @@ const SingUp = () => {
 
       createUser(data.email,data.password)
       .then(result=>{
-        Swal.fire({
-          position: 'top-center',
-          icon: 'success',
-          title: 'SingUp successfull',
-          showConfirmButton: false,
-          timer: 1500
+       
+
+        console.log( result.user)
+
+        updateUserProfile(data.name,imageUrl)
+        .then(()=>{
+          Swal.fire({
+            position: 'top-center',
+            icon: 'success',
+            title: 'SingUp successfull',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          navigate(from, { replace: true });
+        })
+        .catch((err)=>{
+          setLoading(false)
+          console.log(err.message)
         })
       })
       .catch(err => {
@@ -176,12 +196,17 @@ const SingUp = () => {
 
 
 
-              <input
+            <div className="w-full">
+            <input
                 className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
                 placeholder="Conform password"
                 type="text"
                 {...register("conformPassword", { required: true })}
               />
+              {conformError && (
+                  <span className="text-red-600">{conformError}</span>
+                )}
+            </div>
 
 
               <input
@@ -197,6 +222,9 @@ const SingUp = () => {
               </Link>
             </h1>
             <div className="divider ">OR</div>
+            <div className="w-full">
+            <SocialLogin></SocialLogin>
+            </div>
           </div>
         </div>
       </div>

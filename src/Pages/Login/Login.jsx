@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Provider/AuthProvider";
+import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
 
@@ -130,6 +131,10 @@ const Login = () => {
               </Link>
             </h1>
             <div className="divider ">OR</div>
+            <div className="w-full">
+              <SocialLogin></SocialLogin>
+           
+            </div>
           </div>
         </div>
       </div>
