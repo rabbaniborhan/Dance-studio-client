@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../../components/Banner/Banner";
-import Container from "../../components/Shared/Container";
+import PopularClass from "./PopularClass/PopularClass";
 
 const Home = () => {
   return (
@@ -10,7 +10,9 @@ const Home = () => {
       </Helmet>
 
       <Banner></Banner>
-      <Container></Container>
+     
+        <PopularClass></PopularClass>
+    
     </div>
   );
 };

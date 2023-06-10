@@ -10,7 +10,7 @@ import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
 
-  const { loading, setLoading, signIn,  } =
+  const {  setLoading, signIn,  } =
   useContext(AuthContext)
   const navigate = useNavigate()
   const location = useLocation()
@@ -24,7 +24,6 @@ const Login = () => {
 
 
   const onSubmit = (data) => {
-   
 
     signIn(data.email, data.password)
     .then(result => {
@@ -36,8 +35,6 @@ const Login = () => {
       console.log(err.message)
      
     })
-
-
 
 
     reset();
