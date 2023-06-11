@@ -4,6 +4,9 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SingUp from "../Pages/SingUp/SingUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Classes from "../Pages/Classes/Classes";
+import Instructor from "../Pages/Instructor/Instructor";
+import DashBoard from "./DashBoard/DashBoard/DashBoard";
 
  export const router = createBrowserRouter([
     {
@@ -14,6 +17,14 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
         {
             path:'/',
             element:<Home></Home>
+        },
+        {
+           path:'/allclass',
+           element:<Classes></Classes>
+        },
+        {
+          path:'/allinstructor',
+          element:<Instructor></Instructor>
         }
       ]
     },
@@ -24,5 +35,9 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
     {
         path:'/singup',
         element:<SingUp></SingUp>
+    },
+    {
+      path:'/dashboard',
+      element:<DashBoard></DashBoard>
     }
   ]);

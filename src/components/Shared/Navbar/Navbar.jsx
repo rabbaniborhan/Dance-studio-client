@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import Avater from "./Avater";
 
 const Navbar = () => {
-  const { user, logOut,loading } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut()
@@ -26,6 +26,12 @@ const Navbar = () => {
     <>
       <li className="">
         <NavLink
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "",
+              textDecoration:isActive? "underline":"",
+            };
+          }}
           to="/"
           className="bg-transparent font-semibold hover:scale-125  hover:text-purple-400 hover:font-bold transition text-black"
         >
@@ -33,20 +39,47 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="bg-transparent  font-semibold hover:scale-125  hover:text-purple-500 hover:font-bold transition text-black">
+        <NavLink
+        to='/allinstructor'
+        style={({ isActive }) => {
+          return {
+            color: isActive ? "red" : "",
+            textDecoration:isActive? "underline":"",
+          };
+        }}
+          className="bg-transparent  font-semibold hover:scale-125  hover:text-purple-500 hover:font-bold transition text-black"
+        >
           Instructors
         </NavLink>
       </li>
       <li>
-        <NavLink className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black">
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "",
+              textDecoration:isActive? "underline":"",
+            };
+          }}
+          to="/allclass"
+          className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
+        >
           Classes
         </NavLink>
       </li>
 
       {user && (
         <li>
-          <NavLink className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black">
-           Dashboard
+          <NavLink
+          to='/dashboard'
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "",
+              textDecoration:isActive? "underline":"",
+            };
+          }}
+            className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
+          >
+            Dashboard
           </NavLink>
         </li>
       )}

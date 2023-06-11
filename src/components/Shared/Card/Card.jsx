@@ -10,7 +10,7 @@ const Card = ({ item }) => {
   } = item;
   
   return (
-    <div>
+    <div className="">
       <div className="card w-72 bg-base-100 mb-10 shadow-xl m group">
         <figure className="relative">
           <p className=" absolute top-0 right-0 font-semibold  bg-black p-2  text-pink-600">
@@ -19,7 +19,7 @@ const Card = ({ item }) => {
           </p>
           <img className="w-full h-52 group-hover:scale-110 transition" src={Image} alt="Shoes" />
         </figure>
-        <div className="card-body h-1/2">
+        <div className="card-body group-hover:bg-black group-hover:rounded-lg group-hover:text-white transition  h-1/2">
           <h2 className="card-title text-purple-400">{Name}</h2>
           <h4 className="text-lg text-purple-600 font-semibold">
             {InstructorName}
