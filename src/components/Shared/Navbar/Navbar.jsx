@@ -5,9 +5,12 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import Avater from "./Avater";
 import {BsCart4 }from 'react-icons/bs'
+import useCart from "../../../Hooks/UseCart";
 
 const Navbar = () => {
   const { user, logOut, loading } = useContext(AuthContext);
+  const [cart]=useCart()
+ 
 
   const handleLogOut = () => {
     logOut()
@@ -68,10 +71,10 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <Link to="/">
+        <Link to="/dashboard/mycarts">
           <button className="flex items-center gap-1">
-          <BsCart4></BsCart4>
-            <div className="badge badge-secondary">0</div>
+          <BsCart4 size={20}></BsCart4>
+            <div className="badge badge-secondary">{cart?.length}</div>
           </button>
         </Link>
       </li>

@@ -6,7 +6,12 @@ import SingUp from "../Pages/SingUp/SingUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Classes from "../Pages/Classes/Classes";
 import Instructor from "../Pages/Instructor/Instructor";
-import DashBoard from "./DashBoard/DashBoard/DashBoard";
+import Dashboard from "../layouts/DashBoard/Dashboard";
+import MyCart from "../Pages/DashBoard/MyCart/MyCart";
+import EnrollClass from "../Pages/DashBoard/EnrollClass/EnrollClass";
+import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
+
+
 
  export const router = createBrowserRouter([
     {
@@ -38,6 +43,20 @@ import DashBoard from "./DashBoard/DashBoard/DashBoard";
     },
     {
       path:'/dashboard',
-      element:<DashBoard></DashBoard>
+      element:<Dashboard></Dashboard>,
+      children:[
+        {
+          path:'/dashboard/mycarts',
+          element:<MyCart></MyCart>
+        },
+        {
+          path:'/dashboard/enrollclass',
+          element:<EnrollClass></EnrollClass>
+        },
+        {
+        path:'/dashboard/paymentHistory',
+        element:<PaymentHistory></PaymentHistory>
+        }
+      ]
     }
   ]);
