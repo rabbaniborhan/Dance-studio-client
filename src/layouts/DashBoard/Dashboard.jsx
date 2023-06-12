@@ -2,6 +2,9 @@ import { Link, Outlet } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { BsPaypal } from "react-icons/bs";
+import { FaHome } from "react-icons/fa";
+import { MdClass } from "react-icons/md";
+import { GiTeacher } from "react-icons/gi";
 const Dashboard = () => {
   return (
     <div>
@@ -28,21 +31,39 @@ const Dashboard = () => {
             </div>
             <li>
               <Link to="/dashboard/mycarts">
-               
                 <BsCart4 size={20}></BsCart4>my cart
               </Link>
             </li>
             <li>
-              <Link to='/dashboard/enrollclass'>
+              <Link to="/dashboard/enrollclass">
                 <BsFillCalendarCheckFill size={18}></BsFillCalendarCheckFill>{" "}
                 Enroll class
               </Link>
             </li>
             <li>
-              <Link to='/dashboard/paymentHistory'>
+              <Link to="/dashboard/paymentHistory">
                 <BsPaypal size={18}></BsPaypal> payment history
               </Link>
             </li>
+
+            <div className="divider my-6"></div>
+
+            <li>
+              <Link to="/">
+                <FaHome size={18}></FaHome>home
+              </Link>
+            </li>
+            <li>
+              <Link to="/allclass">
+                <MdClass size={18}></MdClass> class
+              </Link>
+            </li>
+            <li>
+              <Link to="/allinstructor">
+                <GiTeacher size={18}></GiTeacher> Instructor
+              </Link>
+            </li>
+            <div className="divider my-6"></div>
           </ul>
         </div>
       </div>
