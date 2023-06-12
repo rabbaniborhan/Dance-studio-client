@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import InstructorCard from "../../components/Shared/InstructorCard/InstructorCard";
+import { Helmet } from "react-helmet-async";
 
 const Instructor = () => {
   const [Instructors, setInstructors] = useState([]);
@@ -9,10 +10,13 @@ const Instructor = () => {
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);
-  console.log(Instructors)
+  
 
   return (
     <div>
+      <Helmet>
+        <title>Instructor | Dance Studio</title>
+      </Helmet>
       <div className="bg-[url('https://i.ibb.co/RNgnSHv/instructor.jpg')] bg-cover bg-fixed bg-no-repeat">
         <div className="w-4/6  text-white text-center mx-auto py-32 ">
           <h1 className="font-bold text-3xl uppercase  py-8">

@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import Avater from "./Avater";
+import {BsCart4 }from 'react-icons/bs'
 
 const Navbar = () => {
   const { user, logOut, loading } = useContext(AuthContext);
@@ -24,12 +25,12 @@ const Navbar = () => {
 
   const NavOptions = (
     <>
-      <li className="">
+      <li className=" flex items-center">
         <NavLink
           style={({ isActive }) => {
             return {
               color: isActive ? "red" : "",
-              textDecoration:isActive? "underline":"",
+              textDecoration: isActive ? "underline" : "",
             };
           }}
           to="/"
@@ -40,13 +41,13 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-        to='/allinstructor'
-        style={({ isActive }) => {
-          return {
-            color: isActive ? "red" : "",
-            textDecoration:isActive? "underline":"",
-          };
-        }}
+          to="/allinstructor"
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "red" : "",
+              textDecoration: isActive ? "underline" : "",
+            };
+          }}
           className="bg-transparent  font-semibold hover:scale-125  hover:text-purple-500 hover:font-bold transition text-black"
         >
           Instructors
@@ -57,7 +58,7 @@ const Navbar = () => {
           style={({ isActive }) => {
             return {
               color: isActive ? "red" : "",
-              textDecoration:isActive? "underline":"",
+              textDecoration: isActive ? "underline" : "",
             };
           }}
           to="/allclass"
@@ -66,17 +67,25 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
+      <li>
+        <Link to="/">
+          <button className="flex items-center gap-1">
+          <BsCart4></BsCart4>
+            <div className="badge badge-secondary">0</div>
+          </button>
+        </Link>
+      </li>
 
       {user && (
         <li>
           <NavLink
-          to='/dashboard'
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "red" : "",
-              textDecoration:isActive? "underline":"",
-            };
-          }}
+            to="/dashboard"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "red" : "",
+                textDecoration: isActive ? "underline" : "",
+              };
+            }}
             className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
           >
             Dashboard

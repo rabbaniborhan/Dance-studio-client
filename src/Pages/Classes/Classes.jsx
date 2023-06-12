@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/Shared/Card/Card";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -15,6 +16,10 @@ const Classes = () => {
 
     return (
         <div className="py-16">
+
+<Helmet>
+        <title>class | Dance Studio</title>
+      </Helmet>
             <div className="bg-[url('https://i.ibb.co/BnNgy1F/classimg.jpg')] bg-cover bg-fixed bg-no-repeat">
                 <div className="w-4/6  text-white text-center mx-auto py-32 ">
                     <h1 className="font-bold text-3xl uppercase  py-8">

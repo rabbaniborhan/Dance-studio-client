@@ -15,8 +15,7 @@ const SocialLogin = () => {
 const handleGoogleLogin=()=>{
     signInWithGoogle()
     .then(result => {
-        const loggedInUser = result.user;
-        console.log(loggedInUser);
+        console.log(result)
         Swal.fire({
             position: 'center',
             icon: 'success',

@@ -20,7 +20,6 @@ const InstructorCard = ({ item }) => {
             </ol>
           </div>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Watch</button>
           </div>
         </div>
       </div>

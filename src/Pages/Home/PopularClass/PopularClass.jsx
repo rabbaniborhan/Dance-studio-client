@@ -1,6 +1,7 @@
 import  { useEffect, useState } from 'react';
 import Card from '../../../components/Shared/Card/Card';
 import SectionTitle from '../../../components/Shared/SectionTitle/SectionTitle';
+import { Link } from 'react-router-dom';
 
 const PopularClass = () => {
       const [classes , setClasses]=useState([])
@@ -21,6 +22,10 @@ const PopularClass = () => {
                classes.map(item=><Card key={item._id} item={item}></Card>)
             }
         </div>
+       <div className='w-32 mx-auto '>
+      <Link to='/allclass'> <button className='btn bg-pink-700  my-6 text-white '>All class</button></Link>
+       </div>
+       <hr className='border-2 w-4/5 mx-auto  border-purple-600 mb-20' />
        </div>
     );
 };
