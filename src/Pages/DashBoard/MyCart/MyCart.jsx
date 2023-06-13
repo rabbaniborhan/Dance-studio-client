@@ -4,7 +4,7 @@ import{MdDelete} from "react-icons/md"
 import Swal from "sweetalert2";
 
 const MyCart = () => {
-  const [cart] = useCart();
+  const [cart,refetch] = useCart();
   
   const total = cart.reduce((sum,item)=>item.Price+sum ,0)
 
@@ -15,7 +15,7 @@ const MyCart = () => {
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        text: "You are delete this Class",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -23,15 +23,16 @@ const MyCart = () => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`http://localhost:5000/carts/?${id}`,{
+            fetch(`http://localhost:5000/carts/${id}`,{
                 method:'DELETE'
             })
             .then(res=>res.json())
             .then(data=>{
                 if(data.deletedCount > 0){
+                    refetch()
                     Swal.fire(
                         'Deleted!',
-                        'Your file has been deleted.',
+                        'Your class has been deleted.',
                         'success'
                       )
                 }

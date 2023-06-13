@@ -16,86 +16,81 @@ const SingUp = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const {
-    setLoading,
-    createUser,
-    updateUserProfile,
-  } = useContext(AuthContext)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const from = location.state?.from?.pathname || '/';
+  const { setLoading, createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [show, setShow] = useState(false);
-  const [conformError,setConformError]= useState('');
-
+  const [conformError, setConformError] = useState("");
 
   // handle user create
   const onSubmit = (data) => {
-    
-
-
-
-
-
-    if(data.password != data.conformPassword){
-      setConformError("Don't Match ConformPassword")
+    if (data.password != data.conformPassword) {
+      setConformError("Don't Match ConformPassword");
       return;
     }
     // image upload
-    const image =data.photo[0];
-    const formData = new FormData()
-    formData.append('image', image)
+    const image = data.photo[0];
+    const formData = new FormData();
+    formData.append("image", image);
 
     const url = `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_KEY
-      }`
-      fetch(url, {
-        method:'POST',
-        body:formData,
-      })
-        .then(res => res.json())
-        .then(imageData => {
-      const imageUrl = imageData.data.display_url;
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        const imageUrl = imageData.data.display_url;
 
-      createUser(data.email,data.password)
-      .then(result=>{
-       
+        createUser(data.email, data.password)
+          .then((result) => {
+            console.log(result.user);
 
-        console.log( result.user)
-
-        updateUserProfile(data.name,imageUrl)
-        .then(()=>{
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'SingUp successfull',
-            showConfirmButton: false,
-            timer: 1500
+            updateUserProfile(data.name, imageUrl)
+              .then(( ) => {
+                const userDocument ={Name:data.name,role:'student',Email:data.email,Image:imageUrl}
+                fetch("http://localhost:5000/users", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(userDocument),
+                 })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    if (data.insertedId) {
+                      Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "SingUp successfull",
+                        showConfirmButton: false,
+                        timer: 1500,
+                      });
+                      navigate(from, { replace: true });
+                      reset();
+                    }
+                  });
+              })
+              .catch((err) => {
+                setLoading(false);
+                console.log(err.message);
+              });
           })
-          navigate(from, { replace: true });
-          reset();
-        })
-        .catch((err)=>{
-          setLoading(false)
-          console.log(err.message)
-        })
-      })
-      .catch(err => {
-        setLoading(false)
-        console.log(err.message)
-       
-      })
-
-
-        }) 
+          .catch((err) => {
+            setLoading(false);
+            console.log(err.message);
+          });
+      });
   };
-
 
   const showPassword = () => {
     setShow(!show);
   };
   return (
     <div className="w-4/5 mx-auto my-10 p-10  font-serif shadow-2xl">
-
       <Helmet>
         <title>SingUp | Dance Studio</title>
       </Helmet>
@@ -112,7 +107,6 @@ const SingUp = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col  items-center justify-between pt-8 px-10 "
             >
-
               <div className="w-full">
                 <input
                   className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
@@ -124,7 +118,6 @@ const SingUp = () => {
                   <span className="text-red-600">Name is required</span>
                 )}
               </div>
-
 
               <div className="w-full">
                 <input
@@ -138,7 +131,6 @@ const SingUp = () => {
                 )}
               </div>
 
-
               <div className="w-full">
                 <input
                   className="py-4"
@@ -151,7 +143,6 @@ const SingUp = () => {
                   <span className="text-red-600">photo is required</span>
                 )}
               </div>
-
 
               <div className="w-full">
                 <div className="flex items-center  w-full">
@@ -194,26 +185,22 @@ const SingUp = () => {
                 )}
               </div>
 
-
-
-            <div className="w-full">
-            <input
-                className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
-                placeholder="Conform password"
-                type="password"
-                {...register("conformPassword", { required: true })}
-              />
-              {conformError && (
+              <div className="w-full">
+                <input
+                  className="bg-gray-200 w-full my-4 shadow p-2 border border-black rounded-full "
+                  placeholder="Conform password"
+                  type="password"
+                  {...register("conformPassword", { required: true })}
+                />
+                {conformError && (
                   <span className="text-red-600">{conformError}</span>
                 )}
-            </div>
-
+              </div>
 
               <input
                 type="submit"
                 className="btn btn-block rounded-full mt-4 btn-primary"
               />
-
             </form>
             <h1 className="text-black mx-10 mt-4 mb-10">
               You have already account?
@@ -223,7 +210,7 @@ const SingUp = () => {
             </h1>
             <div className="divider ">OR</div>
             <div className="w-full">
-            <SocialLogin></SocialLogin>
+              <SocialLogin></SocialLogin>
             </div>
           </div>
         </div>

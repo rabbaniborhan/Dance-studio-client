@@ -10,6 +10,9 @@ import Dashboard from "../layouts/DashBoard/Dashboard";
 import MyCart from "../Pages/DashBoard/MyCart/MyCart";
 import EnrollClass from "../Pages/DashBoard/EnrollClass/EnrollClass";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
+import ManageClass from "../Pages/DashBoard/ManageClass/ManageClass";
+import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -43,7 +46,7 @@ import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
     },
     {
       path:'/dashboard',
-      element:<Dashboard></Dashboard>,
+      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
         {
           path:'/dashboard/mycarts',
@@ -56,6 +59,15 @@ import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
         {
         path:'/dashboard/paymentHistory',
         element:<PaymentHistory></PaymentHistory>
+        },
+        {
+          path:'/dashboard/allclass',
+          element:<ManageClass></ManageClass>
+        },
+        {
+          path:'/dashboard/alluser',
+          element:<AllUsers></AllUsers>
+
         }
       ]
     }
