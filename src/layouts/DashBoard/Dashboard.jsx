@@ -3,14 +3,17 @@ import { BsCart4 } from "react-icons/bs";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { BsPaypal } from "react-icons/bs";
 import { FaHome,FaUserShield } from "react-icons/fa";
-import { MdClass,MdHome } from "react-icons/md";
+import { MdClass,MdHome,MdLibraryAdd,MdManageAccounts } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
 import useCart from "../../Hooks/UseCart";
 import useAdmin from "../../Hooks/useAdmin";
+
 const Dashboard = () => {
     const[cart]=useCart();
 
     const [isAdmin]= useAdmin()
+    const isInstructor = true;
+    // const isAdmin =false;
     
   return (
     <div>
@@ -41,6 +44,11 @@ const Dashboard = () => {
               <li><Link to='/dashboard'> <MdHome size={20}></MdHome> Admin Home</Link></li>
               <li><Link to='/dashboard/allclass'> <BsFillCalendarCheckFill size={18}></BsFillCalendarCheckFill> manage class</Link></li>
               <li><Link to='/dashboard/alluser'><FaUserShield size={18}></FaUserShield> manage user</Link></li>
+
+              </>:isInstructor?
+              <> <li><Link to='/dashboard'> <MdHome size={20}></MdHome> Instructor home</Link></li>
+              <li><Link to='/dashboard/addclass' className=""> <MdLibraryAdd size={18}></MdLibraryAdd> add class</Link></li>
+              <li><Link to='/dashboard/myclass' className=""> <MdManageAccounts size={18}></MdManageAccounts> my class</Link></li>
 
               </>: <>
                <li>

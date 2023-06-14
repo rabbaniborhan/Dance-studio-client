@@ -13,6 +13,9 @@ import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 import ManageClass from "../Pages/DashBoard/ManageClass/ManageClass";
 import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import MyClass from "../Pages/DashBoard/MyClass/MyClass";
+import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 
 
 
@@ -66,8 +69,17 @@ import PrivateRoute from "./PrivateRoute";
         },
         {
           path:'/dashboard/alluser',
-          element:<AllUsers></AllUsers>
+          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
 
+        },
+        {
+          path:'/dashboard/myclass',
+          element:<MyClass></MyClass>
+        },
+
+        {
+          path:'/dashboard/addclass',
+          element:<AddClass></AddClass>
         }
       ]
     }

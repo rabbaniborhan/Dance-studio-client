@@ -9,7 +9,9 @@ const Classes = () => {
     fetch("http://localhost:5000/allclass")
       .then((res) => res.json())
       .then((data) => setClasses(data));
-  }, []);
+  }, []);    
+
+  
 
   return (
     <div className="py-16">
