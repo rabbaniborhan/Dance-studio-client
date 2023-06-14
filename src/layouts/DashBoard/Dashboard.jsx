@@ -6,10 +6,11 @@ import { FaHome,FaUserShield } from "react-icons/fa";
 import { MdClass,MdHome } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
 import useCart from "../../Hooks/UseCart";
+import useAdmin from "../../Hooks/useAdmin";
 const Dashboard = () => {
     const[cart]=useCart();
 
-    const isAdmin= true;
+    const [isAdmin]= useAdmin()
     
   return (
     <div>
