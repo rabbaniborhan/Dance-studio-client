@@ -8,12 +8,12 @@ const ManageClass = () => {
 
     const [axiosSecure]= useAxiosSecure()
     const { data: classes = [], refetch } = useQuery(["classes"], async () => {
-      const res = await axiosSecure.get("/allclass");
+      const res = await axiosSecure.get("/allclasses");
       return res.data;
     });
 
     const handleApproved = (id) => {
-        fetch(`http://localhost:5000/allclassApprove/${id}`, {
+        fetch(`http://localhost:5000/classApprove/${id}`, {
           method: "PATCH",
         })
           .then((res) => res.json())
@@ -23,14 +23,37 @@ const ManageClass = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "This users Now Admin",
+                title: "This class  is approved",
                 showConfirmButton: false,
                 timer: 1500,
               });
             }
           });
-        console.log(id)
+       
       };
+
+
+      const handleDeny =(id)=>{
+        fetch(`http://localhost:5000/classdeny/${id}`, {
+          method: "PATCH",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            refetch();
+            if (data.modifiedCount) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "This class  is approved",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          });
+
+
+
+      }
 
 
     return (
@@ -87,13 +110,13 @@ const ManageClass = () => {
                     <td>{row.InstructorName}</td>
                     <th>
                         {
-                            row?.status =="pendding"?<>panding</>:row.status=='approved'?<> approved</>:<>denied</>
+                            row?.Status =="pending"?<>pending</>:row.Status=='approved'?<> approved</>:<>denied</>
                         }
                     </th>
                     <td>
-                       <div className="flex flex-col">
-                        <button  className="btn btn-sm bg-rose-500" onClick={()=>handleApproved(row._id)}> Approve</button>
-                        <button  className="btn btn-sm bg-rose-500"> Deny</button>
+                       <div disabled className="flex flex-col">
+                        <button disabled={row.Status=="approved" || row.Status=="denied"}  className="btn btn-sm bg-rose-500" onClick={()=>handleApproved(row._id)}> Approve</button>
+                        <button disabled={row.Status=="denied"}  onClick={()=>handleDeny(row._id)} className="btn btn-sm bg-rose-500"> Deny</button>
                        </div>
                     </td>
                     

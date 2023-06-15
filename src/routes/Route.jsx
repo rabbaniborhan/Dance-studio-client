@@ -16,6 +16,8 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import MyClass from "../Pages/DashBoard/MyClass/MyClass";
 import AddClass from "../Pages/DashBoard/AddClass/AddClass";
+import UpdateClass from "../Pages/DashBoard/UpdateClass/UpdateClass";
+import InstructorRoute from "./InstructorRoute";
 
 
 
@@ -48,6 +50,13 @@ import AddClass from "../Pages/DashBoard/AddClass/AddClass";
         element:<SingUp></SingUp>
     },
     {
+
+      path:"/updateclass/:id",
+      element:<UpdateClass></UpdateClass>,
+      loader:({params})=> fetch(`http://localhost:5000/class/${params.id}`)
+
+    },
+    {
       path:'/dashboard',
       element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
@@ -65,7 +74,7 @@ import AddClass from "../Pages/DashBoard/AddClass/AddClass";
         },
         {
           path:'/dashboard/allclass',
-          element:<ManageClass></ManageClass>
+          element:<AdminRoute><ManageClass></ManageClass></AdminRoute>
         },
         {
           path:'/dashboard/alluser',
@@ -74,7 +83,7 @@ import AddClass from "../Pages/DashBoard/AddClass/AddClass";
         },
         {
           path:'/dashboard/myclass',
-          element:<MyClass></MyClass>
+          element:<InstructorRoute><MyClass></MyClass></InstructorRoute>
         },
 
         {

@@ -82,7 +82,7 @@ const Card = ({ item }) => {
 
   return (
     <div className="">
-      <div className="card w-72 bg-base-100 mb-10 shadow-xl m group">
+      <div className="card w-full mx-4 md:w-72 bg-base-100 mb-10 shadow-xl m group">
         <figure className="relative">
           <p className=" absolute top-0 right-0 font-semibold  bg-black p-2  text-pink-600">
             $ {Price}
@@ -93,7 +93,7 @@ const Card = ({ item }) => {
             alt="Shoes"
           />
         </figure>
-        <div className="card-body   h-1/2">
+        <div className={`card-body ${AvailableSeats==0? 'bg-red-500': 'bg-white'}   h-1/2`}>
           <h2 className="card-title text-purple-600">ClassName: <span className="text-xl">{Name}</span></h2>
           <h4 className="text-lg text-purple-600 font-semibold">
             {InstructorName}
@@ -103,9 +103,9 @@ const Card = ({ item }) => {
 
           <p className="text-green-400">Available Seat:{AvailableSeats}</p>
           <div className="card-actions justify-end">
-            <button
+            <button disabled={AvailableSeats==0}
               onClick={() => handleAddToCart(item)}
-              className="btn  hover:bg-pink-700 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
+              className="btn hover:bg-pink-700 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
             >
               {" "}
               Add Cart

@@ -7,12 +7,13 @@ import { MdClass,MdHome,MdLibraryAdd,MdManageAccounts } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
 import useCart from "../../Hooks/UseCart";
 import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
 
 const Dashboard = () => {
     const[cart]=useCart();
 
     const [isAdmin]= useAdmin()
-    const isInstructor = true;
+    const [isInstructor] = useInstructor() ;
     // const isAdmin =false;
     
   return (
@@ -44,11 +45,23 @@ const Dashboard = () => {
               <li><Link to='/dashboard'> <MdHome size={20}></MdHome> Admin Home</Link></li>
               <li><Link to='/dashboard/allclass'> <BsFillCalendarCheckFill size={18}></BsFillCalendarCheckFill> manage class</Link></li>
               <li><Link to='/dashboard/alluser'><FaUserShield size={18}></FaUserShield> manage user</Link></li>
+              <li>
+              <Link to="/dashboard/mycarts" className="flex ">
+                <BsCart4 size={20}></BsCart4>my cart
+                <span className="badge bg-black text-white border-0">{cart?.length || 0}</span>
+              </Link>
+            </li>
 
               </>:isInstructor?
               <> <li><Link to='/dashboard'> <MdHome size={20}></MdHome> Instructor home</Link></li>
               <li><Link to='/dashboard/addclass' className=""> <MdLibraryAdd size={18}></MdLibraryAdd> add class</Link></li>
               <li><Link to='/dashboard/myclass' className=""> <MdManageAccounts size={18}></MdManageAccounts> my class</Link></li>
+              <li>
+              <Link to="/dashboard/mycarts" className="flex ">
+                <BsCart4 size={20}></BsCart4>my cart
+                <span className="badge bg-black text-white border-0">{cart?.length || 0}</span>
+              </Link>
+            </li>
 
               </>: <>
                <li>

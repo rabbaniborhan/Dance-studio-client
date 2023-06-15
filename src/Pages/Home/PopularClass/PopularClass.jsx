@@ -17,7 +17,7 @@ const PopularClass = () => {
     return (
        <div>
         <SectionTitle heading={'our popular classes'}></SectionTitle>
-         <div className='grid grid-cols-1 md:grid-cols-3 mx-8 md:w-4/5 md:mx-auto'>
+         <div className='grid grid-cols-1 md:grid-cols-3 mx-4 md:w-4/5 md:mx-auto'>
             {
                classes.map(item=><Card key={item._id} item={item}></Card>)
             }

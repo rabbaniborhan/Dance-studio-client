@@ -11,7 +11,6 @@ const MyCart = () => {
 
 
   const handleDelete =(id)=>{
-    console.log(id)
 
     Swal.fire({
         title: 'Are you sure?',
