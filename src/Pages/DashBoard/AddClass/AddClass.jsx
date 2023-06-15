@@ -1,18 +1,69 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const AddClass = () => {
-    const { user } = useAuth();
+  const { user } = useAuth();
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-
   const onSubmit = (data) => {
-    console.log(data);
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        const imageUrl = imageData.data.display_url;
+        const availableSeats = parseInt(data.availableSeate);
+        const price = parseFloat(data.price);
+        const classData = {
+          Name: data.className,
+          Image: imageUrl,
+          InstructorName: data.instructorName,
+          InstructorEmail: data.instructorEmail,
+          Price: price,
+          AvailableSeats: availableSeats,
+          EnrollSeats: 0,
+          Status: "pending",
+        };
+          
+
+         fetch('http://localhost:5000/addclass',{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body:JSON.stringify(classData),
+         })
+         .then(res=>res.json())
+         .then(data=>{
+          if(data.insertedId){
+            reset()
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Your work has been saved',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            
+          }
+         })
+
+      });
   };
 
   return (
@@ -41,21 +92,32 @@ const AddClass = () => {
               </p>
             )}
           </div>
-
           <div className="flex w-full  gap-4">
             <div className="  flex flex-col justify-center">
               <label className="font-bold">Instructor Name*</label>
-              <input className=" p-2 rounded-sm mb-2" value={user.displayName} type="text" {...register("instructorName", {})} />
-            </div >
-           <div className="flex flex-col justify-center"> <label className="font-bold ">Instructor Email*</label>
-            <input className=" p-2 rounded-sm mb-2" value={user.email} type="email" {...register("instructorEmail")} /></div>
+              <input
+                className=" p-2 rounded-sm mb-2"
+                value={user.displayName}
+                type="text"
+                {...register("instructorName", {})}
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              {" "}
+              <label className="font-bold ">Instructor Email*</label>
+              <input
+                className=" p-2 rounded-sm mb-2"
+                value={user.email}
+                type="email"
+                {...register("instructorEmail")}
+              />
+            </div>
           </div>
-
           <div className="flex items-center gap-4">
             <div className=" flex flex-col justify-center">
               <label className="font-bold">Price*</label>
               <input
-              className=" p-2 rounded-sm mb-2"
+                className=" p-2 rounded-sm mb-2"
                 type="number"
                 {...register("price", { required: true })}
                 aria-invalid={errors.price ? "true" : "false"}
@@ -68,7 +130,8 @@ const AddClass = () => {
             </div>
             <div className="flex flex-col justify-center">
               <label className="font-bold">Available seats*</label>
-              <input className=" p-2 rounded-sm mb-2"
+              <input
+                className=" p-2 rounded-sm mb-2"
                 type="number"
                 {...register("availableSeate", { required: true })}
                 aria-invalid={errors.availableSeate ? "true" : "false"}
@@ -80,17 +143,22 @@ const AddClass = () => {
               )}
             </div>
           </div>
-          <input type="file"
-          className=" p-2 rounded-sm mb-2"
-           {...register("image", { required: true })}
-           aria-invalid={errors.image ? "true" : "false"}
-           /> {errors.image?.type === "required" && (
+          <input
+            type="file"
+            className=" p-2 rounded-sm mb-2"
+            {...register("image", { required: true })}
+            aria-invalid={errors.image ? "true" : "false"}
+          />{" "}
+          {errors.image?.type === "required" && (
             <p role="alert" className="text-red-500">
-             plase choose file
+              plase choose file
             </p>
           )}
-
-          <input type="submit" value="add class" className="btn  bg-rose-500 block mx-auto" />
+          <input
+            type="submit"
+            value="add class"
+            className="btn  bg-rose-500 block mx-auto"
+          />
         </form>
       </div>
     </div>

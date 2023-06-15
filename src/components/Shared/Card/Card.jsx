@@ -11,12 +11,12 @@ const Card = ({ item }) => {
     Name,
     Image,
     InstructorName,
-    TotalSeats,
+   
     EnrollSeats,
   } = item;
 
   const { user } = useContext(AuthContext);
-  const [,refetch] = useCart()
+  const [, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,8 +42,7 @@ const Card = ({ item }) => {
         AvailableSeats,
         EnrollSeats,
         TotalSeats,
-        email:user.email
-        
+        email: user.email,
       };
       fetch("http://localhost:5000/carts", {
         method: "POST",
@@ -67,7 +66,6 @@ const Card = ({ item }) => {
         });
     } else {
       Swal.fire({
-        
         title: "Please login to Add to cart",
         icon: "warning",
         showCancelButton: true,
@@ -96,14 +94,13 @@ const Card = ({ item }) => {
           />
         </figure>
         <div className="card-body   h-1/2">
-          <h2 className="card-title text-purple-400">{Name}</h2>
+          <h2 className="card-title text-purple-600">ClassName: <span className="text-xl">{Name}</span></h2>
           <h4 className="text-lg text-purple-600 font-semibold">
             {InstructorName}
           </h4>
-          <p className=" flex justify-between  items-center font-semibold">
-            <p>Total Seat:{TotalSeats}</p>
-            <p>Total Enroll :{EnrollSeats}</p>
-          </p>
+
+          <p>Total Enroll :{EnrollSeats}</p>
+
           <p className="text-green-400">Available Seat:{AvailableSeats}</p>
           <div className="card-actions justify-end">
             <button
