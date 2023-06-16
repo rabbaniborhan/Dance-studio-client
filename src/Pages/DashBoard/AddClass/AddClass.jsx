@@ -42,7 +42,7 @@ const AddClass = () => {
           
         
 
-         fetch('http://localhost:5000/addclass',{
+         fetch('https://dance-class-server.vercel.app/addclass',{
           method:'POST',
           headers:{
             'content-type':'application/json'

@@ -13,7 +13,7 @@ const ManageClass = () => {
     });
 
     const handleApproved = (id) => {
-        fetch(`http://localhost:5000/classApprove/${id}`, {
+        fetch(`https://dance-class-server.vercel.app/classApprove/${id}`, {
           method: "PATCH",
         })
           .then((res) => res.json())
@@ -34,7 +34,7 @@ const ManageClass = () => {
 
 
       const handleDeny =(id)=>{
-        fetch(`http://localhost:5000/classdeny/${id}`, {
+        fetch(`https://dance-class-server.vercel.app/classdeny/${id}`, {
           method: "PATCH",
         })
           .then((res) => res.json())

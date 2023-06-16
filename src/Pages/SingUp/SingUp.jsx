@@ -52,7 +52,7 @@ const SingUp = () => {
             updateUserProfile(data.name, imageUrl)
               .then(( ) => {
                 const userDocument ={Name:data.name,role:'student',Email:data.email,Image:imageUrl}
-                fetch("http://localhost:5000/users", {
+                fetch("https://dance-class-server.vercel.app/users", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

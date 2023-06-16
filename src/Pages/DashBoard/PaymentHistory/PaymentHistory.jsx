@@ -58,13 +58,13 @@ const PaymentHistory = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={row.Image}
+                            src={row.image}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{row.Name}</div>
+                        <div className="font-bold">{row.name}</div>
                       </div>
                     </div>
                   </td>

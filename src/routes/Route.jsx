@@ -57,7 +57,7 @@ import StudentHome from "../Pages/DashBoard/StudentHome/StudentHome";
 
       path:"/updateclass/:id",
       element:<UpdateClass></UpdateClass>,
-      loader:({params})=> fetch(`http://localhost:5000/class/${params.id}`)
+      loader:({params})=> fetch(`https://dance-class-server.vercel.app/class/${params.id}`)
 
     },
     {

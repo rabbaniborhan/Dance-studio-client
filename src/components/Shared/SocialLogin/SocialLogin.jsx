@@ -18,7 +18,7 @@ const handleGoogleLogin=()=>{
         const{user}=result
        
          const userDocument ={Name:user.displayName,role:'student',Email:user.email,Image:user.photoURL        }
-        fetch("http://localhost:5000/users", {
+        fetch("https://dance-class-server.vercel.app/users", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

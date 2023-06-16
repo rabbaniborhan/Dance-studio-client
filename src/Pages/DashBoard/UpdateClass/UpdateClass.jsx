@@ -53,7 +53,7 @@ const UpdateClass = () => {
                 Status: "pending",
               };
 
-              fetch(`http://localhost:5000/classupdate/${_id}`, {
+              fetch(`https://dance-class-server.vercel.app/classupdate/${_id}`, {
                 method: "PUT",
                 headers:{
                    "content-type":"application/json"

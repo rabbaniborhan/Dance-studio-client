@@ -5,6 +5,8 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import Avater from "./Avater";
 import { BsCart4 } from "react-icons/bs";
+import { FaMoon } from "react-icons/fa";
+
 import useCart from "../../../Hooks/UseCart";
 import useAdmin from "../../../Hooks/useAdmin";
 import useInstructor from "../../../Hooks/useInstructor";
@@ -14,6 +16,7 @@ const Navbar = () => {
   const [cart] = useCart();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+ 
 
   const handleLogOut = () => {
     logOut()
@@ -73,15 +76,16 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
+    
      {
-      isAdmin?<></>:isInstructor?<></>: <li>
+      isAdmin?<></>:isInstructor?<></>:user? <li>
       <Link to="/dashboard/mycarts">
         <button className="flex items-center gap-1">
           <BsCart4 size={20}></BsCart4>
           <div className="badge badge-secondary">{cart?.length}</div>
         </button>
       </Link>
-    </li>
+    </li>:<></>
      }
       {isAdmin ? (
         <li>
@@ -101,7 +105,7 @@ const Navbar = () => {
             Dashboard
           </Link>
         </li>
-      ) : (
+      ) :user? (
         <li>
           <Link
             className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
@@ -110,7 +114,7 @@ const Navbar = () => {
             Dashboard
           </Link>
         </li>
-      )}
+      ):( <li></li>)}
     </>
   );
   return (
@@ -156,6 +160,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{NavOptions}</ul>
         </div>
         <div className="navbar-end">
+          <button className="p-3 rounded-full mr-4 bg-gray-100"><FaMoon  size={20}></FaMoon></button>
           <Avater></Avater>
           {user ? (
             <>
