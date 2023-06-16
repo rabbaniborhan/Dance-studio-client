@@ -19,6 +19,9 @@ import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 import UpdateClass from "../Pages/DashBoard/UpdateClass/UpdateClass";
 import InstructorRoute from "./InstructorRoute";
 import Payment from "../Pages/DashBoard/Payment/Payment";
+import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
+import InstructorHome from "../Pages/DashBoard/InstructorHome/InstructorHome";
+import StudentHome from "../Pages/DashBoard/StudentHome/StudentHome";
 
 
 
@@ -89,11 +92,27 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 
         {
           path:'/dashboard/addclass',
-          element:<AddClass></AddClass>
+          element:<InstructorRoute><AddClass></AddClass></InstructorRoute>
         },
         {
           path:'/dashboard/payment/:id',
           element:<Payment></Payment>
+        },
+        {
+
+          path:'/dashboard/Adminhome',
+          element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+
+        },
+        {
+          path:'/dashboard/Instructorhome',
+          element:<InstructorRoute><InstructorHome></InstructorHome></InstructorRoute>
+
+        },
+        {
+          path:'/dashboard/studenthome',
+          element:<StudentHome></StudentHome>
+
         }
       ]
     }

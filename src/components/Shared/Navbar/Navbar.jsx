@@ -4,13 +4,16 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import Avater from "./Avater";
-import {BsCart4 }from 'react-icons/bs'
+import { BsCart4 } from "react-icons/bs";
 import useCart from "../../../Hooks/UseCart";
+import useAdmin from "../../../Hooks/useAdmin";
+import useInstructor from "../../../Hooks/useInstructor";
 
 const Navbar = () => {
-  const { user, logOut, loading } = useContext(AuthContext);
-  const [cart]=useCart()
- 
+  const { user, logOut, } = useContext(AuthContext);
+  const [cart] = useCart();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
   const handleLogOut = () => {
     logOut()
@@ -70,29 +73,42 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
-      <li>
-        <Link to="/dashboard/mycarts">
-          <button className="flex items-center gap-1">
+     {
+      isAdmin?<></>:isInstructor?<></>: <li>
+      <Link to="/dashboard/mycarts">
+        <button className="flex items-center gap-1">
           <BsCart4 size={20}></BsCart4>
-            <div className="badge badge-secondary">{cart?.length}</div>
-          </button>
-        </Link>
-      </li>
-
-      {user && (
+          <div className="badge badge-secondary">{cart?.length}</div>
+        </button>
+      </Link>
+    </li>
+     }
+      {isAdmin ? (
         <li>
-          <NavLink
-            to="/dashboard"
-            style={({ isActive }) => {
-              return {
-                color: isActive ? "red" : "",
-                textDecoration: isActive ? "underline" : "",
-              };
-            }}
+          <Link
             className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
+            to="/dashboard/Adminhome"
           >
             Dashboard
-          </NavLink>
+          </Link>
+        </li>
+      ) : isInstructor ? (
+        <li>
+          <Link
+            className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
+            to="/dashboard/Instructorhome"
+          >
+            Dashboard
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <Link
+            className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
+            to="/dashboard/studenthome"
+          >
+            Dashboard
+          </Link>
         </li>
       )}
     </>
@@ -100,7 +116,7 @@ const Navbar = () => {
   return (
     <div>
       <div className="navbar fixed  z-10    bg-white ">
-        {loading && <h1>loading........</h1>}
+       
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

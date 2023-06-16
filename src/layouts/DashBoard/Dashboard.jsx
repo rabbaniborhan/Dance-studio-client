@@ -9,18 +9,20 @@ import useCart from "../../Hooks/UseCart";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
 
+
 const Dashboard = () => {
     const[cart]=useCart();
 
     const [isAdmin]= useAdmin()
     const [isInstructor] = useInstructor() ;
+   
     // const isAdmin =false;
     
   return (
     <div>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content flex flex-col items-center ">
           {/* Page content here */}
           <Outlet></Outlet>
           <label
@@ -42,28 +44,19 @@ const Dashboard = () => {
 
             {
               isAdmin?<>
-              <li><Link to='/dashboard'> <MdHome size={20}></MdHome> Admin Home</Link></li>
+              <li><Link to='/dashboard/Adminhome'> <MdHome size={20}></MdHome> Admin Home</Link></li>
               <li><Link to='/dashboard/allclass'> <BsFillCalendarCheckFill size={18}></BsFillCalendarCheckFill> manage class</Link></li>
               <li><Link to='/dashboard/alluser'><FaUserShield size={18}></FaUserShield> manage user</Link></li>
-              <li>
-              <Link to="/dashboard/mycarts" className="flex ">
-                <BsCart4 size={20}></BsCart4>my cart
-                <span className="badge bg-black text-white border-0">{cart?.length || 0}</span>
-              </Link>
-            </li>
+              
 
               </>:isInstructor?
-              <> <li><Link to='/dashboard'> <MdHome size={20}></MdHome> Instructor home</Link></li>
+              <> <li><Link to='/dashboard/Instructorhome'> <MdHome size={20}></MdHome> Instructor home</Link></li>
               <li><Link to='/dashboard/addclass' className=""> <MdLibraryAdd size={18}></MdLibraryAdd> add class</Link></li>
               <li><Link to='/dashboard/myclass' className=""> <MdManageAccounts size={18}></MdManageAccounts> my class</Link></li>
-              <li>
-              <Link to="/dashboard/mycarts" className="flex ">
-                <BsCart4 size={20}></BsCart4>my cart
-                <span className="badge bg-black text-white border-0">{cart?.length || 0}</span>
-              </Link>
-            </li>
+             
 
               </>: <>
+              <li><Link to='/dashboard/studenthome'> <MdHome size={20}></MdHome>Student Home</Link></li>
                <li>
               <Link to="/dashboard/mycarts" className="flex ">
                 <BsCart4 size={20}></BsCart4>my cart

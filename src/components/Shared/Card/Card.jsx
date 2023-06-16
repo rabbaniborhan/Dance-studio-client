@@ -3,8 +3,12 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../../Hooks/UseCart";
+import useInstructor from "../../../Hooks/useInstructor";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Card = ({ item }) => {
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const {
     AvailableSeats,
     Price,
@@ -103,7 +107,7 @@ const Card = ({ item }) => {
 
           <p className="text-green-400">Available Seat:{AvailableSeats}</p>
           <div className="card-actions justify-end">
-            <button disabled={AvailableSeats==0}
+            <button disabled={AvailableSeats==0 ||isAdmin||isInstructor}
               onClick={() => handleAddToCart(item)}
               className="btn hover:bg-pink-700 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
             >

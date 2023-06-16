@@ -4,8 +4,10 @@ import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useCart from "../../../Hooks/UseCart";
 
 const CheckoutForm = ({amount,item}) => {
+    const [,refetch] = useCart()
    
   const stripe = useStripe();
   const elements = useElements();
@@ -85,7 +87,10 @@ const CheckoutForm = ({amount,item}) => {
             amount,
             date: new Date(),
             cartItems: item._id,
-            classId:item.classItemId
+            classId:item.classItemId,
+            name:item.Name,
+            image:item.Image,
+           
           
         }
 
@@ -93,6 +98,7 @@ const CheckoutForm = ({amount,item}) => {
         .then(res => {
            
             if (res.data.insertResult.insertedId) {
+                refetch()
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
