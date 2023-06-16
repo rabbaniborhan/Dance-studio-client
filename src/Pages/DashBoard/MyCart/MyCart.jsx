@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import useCart from "../../../Hooks/UseCart";
 import{MdDelete} from "react-icons/md"
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart,refetch] = useCart();
@@ -104,7 +105,7 @@ const MyCart = () => {
                       <button onClick={()=>handleDelete(row._id)} className="btn bg-rose-500 btn-xs px-3"><MdDelete></MdDelete></button>
                     </th>
                     <th>
-                      <button className="btn bg-rose-500 btn-xs">PAY</button>
+                     <Link to={`/dashboard/payment/${row._id}`}> <button className="btn bg-rose-500 btn-xs">PAY</button></Link>
                     </th>
                   </tr>
                 ))}

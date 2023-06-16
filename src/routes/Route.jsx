@@ -18,6 +18,7 @@ import MyClass from "../Pages/DashBoard/MyClass/MyClass";
 import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 import UpdateClass from "../Pages/DashBoard/UpdateClass/UpdateClass";
 import InstructorRoute from "./InstructorRoute";
+import Payment from "../Pages/DashBoard/Payment/Payment";
 
 
 
@@ -89,6 +90,10 @@ import InstructorRoute from "./InstructorRoute";
         {
           path:'/dashboard/addclass',
           element:<AddClass></AddClass>
+        },
+        {
+          path:'/dashboard/payment/:id',
+          element:<Payment></Payment>
         }
       ]
     }
