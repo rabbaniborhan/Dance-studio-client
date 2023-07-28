@@ -32,7 +32,7 @@ const OurDetails = () => {
         <div className=" text-white bg-fuchsia-600 p-6">
             <p className="text-gray-200">The Best Preschool</p>
             <h2 className="text-[20px]  mt-2 font-medium">Providing Quality Education in a Creative Environment</h2>
-            <button className="w-full border-2 border-white rounded-full mt-4 p-3 hover:bg-emerald-300 hover:border-emerald-300 transition-all ">Learn More</button>
+            <button className="w-full border-2 bg-transparent text-white border-white rounded-full mt-4 p-3 hover:bg-emerald-300 hover:border-emerald-300 transition-all ">Learn More</button>
         </div>
       </div>
     </div>

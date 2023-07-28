@@ -12,11 +12,10 @@ import useAdmin from "../../../Hooks/useAdmin";
 import useInstructor from "../../../Hooks/useInstructor";
 
 const Navbar = () => {
-  const { user, logOut, } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
- 
 
   const handleLogOut = () => {
     logOut()
@@ -38,12 +37,11 @@ const Navbar = () => {
         <NavLink
           style={({ isActive }) => {
             return {
-              color: isActive ? "red" : "",
-              textDecoration: isActive ? "underline" : "",
+              color: isActive ? "#2DDA85" : "",
             };
           }}
           to="/"
-          className="bg-transparent font-semibold hover:scale-125  hover:text-purple-400 hover:font-bold transition text-black"
+          className=""
         >
           Home
         </NavLink>
@@ -53,11 +51,10 @@ const Navbar = () => {
           to="/allinstructor"
           style={({ isActive }) => {
             return {
-              color: isActive ? "red" : "",
-              textDecoration: isActive ? "underline" : "",
+              color: isActive ? "#2DDA85" : "",
             };
           }}
-          className="bg-transparent  font-semibold hover:scale-125  hover:text-purple-500 hover:font-bold transition text-black"
+          className=""
         >
           Instructors
         </NavLink>
@@ -66,27 +63,32 @@ const Navbar = () => {
         <NavLink
           style={({ isActive }) => {
             return {
-              color: isActive ? "red" : "",
-              textDecoration: isActive ? "underline" : "",
+              color: isActive ? "#2DDA85" : "",
             };
           }}
           to="/allclass"
-          className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
+          className=""
         >
           Classes
         </NavLink>
       </li>
-    
-     {
-      isAdmin?<></>:isInstructor?<></>:user? <li>
-      <Link to="/dashboard/mycarts">
-        <button className="flex items-center gap-1">
-          <BsCart4 size={20}></BsCart4>
-          <div className="badge badge-secondary">{cart?.length}</div>
-        </button>
-      </Link>
-    </li>:<></>
-     }
+
+      {isAdmin ? (
+        <></>
+      ) : isInstructor ? (
+        <></>
+      ) : user ? (
+        <li>
+          <Link to="/dashboard/mycarts">
+            <button className="flex items-center gap-1">
+              <BsCart4 size={20}></BsCart4>
+              <div className="badge badge-secondary">{cart?.length}</div>
+            </button>
+          </Link>
+        </li>
+      ) : (
+        <></>
+      )}
       {isAdmin ? (
         <li>
           <Link
@@ -105,7 +107,7 @@ const Navbar = () => {
             Dashboard
           </Link>
         </li>
-      ) :user? (
+      ) : user ? (
         <li>
           <Link
             className="bg-transparent font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
@@ -114,13 +116,14 @@ const Navbar = () => {
             Dashboard
           </Link>
         </li>
-      ):( <li></li>)}
+      ) : (
+        <li></li>
+      )}
     </>
   );
   return (
     <div>
       <div className="navbar fixed  z-10    bg-white ">
-       
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -148,19 +151,25 @@ const Navbar = () => {
           </div>
           <Link to="/">
             <div className="ml-8 flex justify-center gap-1 group items-center">
-              <img src={logo} className="w-14 h-12" alt="" />
-              <h1 className=" group-hover:scale-110 text-2xl font-bold italic hidden md:block text-transparent bg-gradient-to-r from-purple-400 to-purple-800 bg-clip-text transition ">
+              <img src={logo} className="w-16 h-14" alt="" />
+             <div>
+             <h1 className=" text-[black] text-2xl font-bold  hidden md:block  ">
                 {" "}
                 Dance Studio
+                
               </h1>
+              <p className="text-gray-500">LEARNING CENTER</p>
+             </div>
             </div>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{NavOptions}</ul>
+          <ul className=" flex gap-8 px-1">{NavOptions}</ul>
         </div>
         <div className="navbar-end">
-          <button className="p-3 rounded-full mr-4 bg-gray-100"><FaMoon  size={20}></FaMoon></button>
+          <span className="p-3 rounded-full mr-4 bg-gray-100">
+            <FaMoon size={20}></FaMoon>
+          </span>
           <Avater></Avater>
           {user ? (
             <>
@@ -173,12 +182,11 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link
-                to="/login"
-                className=" ml-4 mr-10 bg-transparent  font-semibold  hover:scale-125  hover:text-purple-600 hover:font-bold transition text-black"
-              >
-                Login
-              </Link>
+              <li className="ml-6 mr-8">
+                <Link to="/login" className="  font-bold">
+                  Login
+                </Link>
+              </li>
             </>
           )}
         </div>

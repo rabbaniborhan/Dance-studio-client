@@ -97,19 +97,21 @@ const Card = ({ item }) => {
             alt="Shoes"
           />
         </figure>
-        <div className={`card-body ${AvailableSeats==0? 'bg-red-500': 'bg-white'}   h-1/2`}>
-          <h2 className="card-title text-purple-600">ClassName: <span className="text-xl">{Name}</span></h2>
-          <h4 className="text-lg text-purple-600 font-semibold">
-            {InstructorName}
+        <div className={` ${AvailableSeats==0? 'bg-red-500': 'bg-white'} p-6 rounded-b-2xl  h-[230]`}>
+          <h2 className=" text-[#2DDA85] text-2xl"> <span className="text-xl">{Name}</span></h2>
+         <div className="flex justify-between ">
+         <p>Total Enroll :{EnrollSeats}</p>
+          <p className="">Available Seat:{AvailableSeats}</p>
+         </div>
+         <p className="pt-2 text-gray-500 text-sm">Competitive activities and movement classes form the basis of these programs.</p>
+         <h4 className=" text-purple-400">
+            Teacher: {InstructorName}
           </h4>
-
-          <p>Total Enroll :{EnrollSeats}</p>
-
-          <p className="text-green-400">Available Seat:{AvailableSeats}</p>
-          <div className="card-actions justify-end">
+          
+          <div className=" ml-32  mt-5">
             <button disabled={AvailableSeats==0 ||isAdmin||isInstructor}
               onClick={() => handleAddToCart(item)}
-              className="btn hover:bg-pink-700 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
+              className=" text-white"
             >
               {" "}
               Add Cart

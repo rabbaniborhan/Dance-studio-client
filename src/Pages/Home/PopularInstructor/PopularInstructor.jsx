@@ -21,15 +21,10 @@ const PopularInstructor = () => {
         ))}
       </div>
 
-      <div className="w-32 mx-auto ">
-        <Link to="/allinstructor">
-          
-          <button className="btn bg-pink-700  my-6 text-white ">
-            All Instructor
-          </button>
-        </Link>
+      <div className="w-32 mx-auto my-12 ">
+        <Link to="/allinstructor" className= 'border-b-4 border-[#2DDA85] font-semibold rounded-lg  my-6  py-[8px] px-[15px] hover:shadow hover:shadow-[#2DDA85] hover:bg-[#2DDA85] transition duration-300'>All Instructor</Link>
       </div>
-      <hr className="border-2 w-4/5 mx-auto  border-purple-600 mb-20" />
+     
     </div>
   );
 };
